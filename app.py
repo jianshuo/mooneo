@@ -46,7 +46,7 @@ with st.sidebar:
 
 if audio_bytes or text_prompt:
     if audio_bytes:
-        st.audio(audio_bytes, format="audio/wav", autoplay=True)
+        # st.audio(audio_bytes, format="audio/wav", autoplay=True)
         deployment_id = "wisper"  # This will correspond to the custom name you chose for your deployment when you deployed a model."
 
         # Save the recorded audio to a temporary file
@@ -59,8 +59,6 @@ if audio_bytes or text_prompt:
         result = whisper_client.audio.transcriptions.create(
             file=open(temp_audio_path, "rb"), model="wisper"
         )
-
-        st.write(result)
 
         # Remove temporary file
         os.remove(temp_audio_path)

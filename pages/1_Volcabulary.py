@@ -5,7 +5,6 @@ import urllib
 files = [file for file in os.listdir("dicts") if file.endswith(".txt")]
 files = sorted(files)
 
-
 data = {}
 
 
@@ -20,8 +19,11 @@ def get_terms(raw):
 
 
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-st.title("Remember Everything")
+
 st.subheader("Please click on the button on the left to play the video")
+
+repeat = 1
+padding = 0
 
 
 def show_video(term):
