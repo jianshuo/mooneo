@@ -127,3 +127,4 @@ audio_recorder_streamlit
 elasticsearch
 elasticsearch_dsl
 webvtt-py
+requests

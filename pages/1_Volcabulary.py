@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import urllib
+import requests
 
 files = [file for file in os.listdir("dicts") if file.endswith(".txt")]
 files = sorted(files)
@@ -27,10 +28,12 @@ padding = 0
 
 
 def show_video(term):
+    url = f"https://video.chato.cn/m3u8/{urllib.parse.quote(term)}.m3u8?repeat={repeat}&padding={padding}"
     st.video(
-        f"https://video.chato.cn/m3u8/{urllib.parse.quote(term)}.m3u8?repeat={repeat}&padding={padding}",
+        url,
         autoplay=True,
         loop=True,
+        subtitles=requests.get(url.replace(".m3u8", ".srt")).content,
     )
 
 
