@@ -1,5 +1,4 @@
 import streamlit as st
-from video_lib import srtseg_from_es
 import os
 import urllib
 
@@ -35,7 +34,6 @@ with col2:
 def show_video(term):
     st.video(
         f"https://video.chato.cn/m3u8/{urllib.parse.quote(term)}.m3u8?repeat={repeat}&padding={padding}",
-        subtitles=srtseg_from_es(term, repeat, padding).srtstr(),
         autoplay=True,
         loop=True,
     )
