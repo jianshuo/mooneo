@@ -24,13 +24,6 @@ st.title("Remember Everything")
 st.subheader("Please click on the button on the left to play the video")
 
 
-col1, col2 = st.columns([1, 1])
-with col1:
-    repeat = st.slider("How many times you want the video to repeat?", 1, 10)
-with col2:
-    padding = st.slider("Context", 0, 3)
-
-
 def show_video(term):
     st.video(
         f"https://video.chato.cn/m3u8/{urllib.parse.quote(term)}.m3u8?repeat={repeat}&padding={padding}",
@@ -40,7 +33,7 @@ def show_video(term):
 
 
 with st.sidebar:
-    vocab_tab, search_tab = st.tabs(["词汇", "搜索"])
+    vocab_tab, search_tab, setting_tab = st.tabs(["词汇", "搜索", "设置"])
     with vocab_tab:
         level = st.selectbox("单词表", files)
         letter = st.selectbox(
@@ -92,6 +85,9 @@ with st.sidebar:
     with search_tab:
         search_term = st.text_input("Search")
         show_video(search_term)
+    with setting_tab:
+        repeat = st.slider("How many times you want the video to repeat?", 1, 10)
+        padding = st.slider("Context", 0, 3)
 
 
 # import json
