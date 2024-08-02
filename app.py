@@ -56,9 +56,12 @@ if audio_bytes or text_prompt:
             temp_audio_file.write(audio_bytes)
             temp_audio_path = temp_audio_file.name
 
-        result = whisper_client.audio.transcriptions.create(
-            file=open(temp_audio_path, "rb"), model="wisper"
-        )
+        try:
+            result = whisper_client.audio.transcriptions.create(
+                file=open(temp_audio_path, "rb"), model="wisper"
+            )
+        except:
+            pass
 
         # Remove temporary file
         os.remove(temp_audio_path)
