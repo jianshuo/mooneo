@@ -46,7 +46,7 @@ with st.sidebar:
 
 if audio_bytes or text_prompt:
     if audio_bytes:
-        # st.audio(audio_bytes, format="audio/wav", autoplay=True)
+        st.audio(audio_bytes, format="audio/wav", autoplay=True)
         deployment_id = "wisper"  # This will correspond to the custom name you chose for your deployment when you deployed a model."
 
         # Save the recorded audio to a temporary file
@@ -89,10 +89,14 @@ if audio_bytes or text_prompt:
     )
     st.session_state.messages.append({"role": "user", "content": prompt})
 
+    print("=" * 10, "Sending prompt to OpenAI")
+    print(st.session_state.messages)
+
     response = client.chat.completions.create(
         messages=st.session_state.messages,
         model="gpt-4o",
     )
+    print("Getting resutl from OpenAI", response)
 
     with st.chat_message("assistant"):
         reply = response.choices[0].message.content
