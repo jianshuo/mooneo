@@ -21,7 +21,8 @@ def get_terms(raw):
 
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
-st.subheader("Please click on the button on the left to play the video")
+st.write("Please click on the button on the left to play the video")
+st.write("The image illustrates the meaning of the word")
 
 repeat = 1
 padding = 0
@@ -35,6 +36,13 @@ def show_video(term):
         loop=True,
         subtitles=requests.get(url.replace(".m3u8", ".srt")).content,
     )
+    urls = requests.get(url.replace(".m3u8", ".jpgs"))
+    cols = st.columns(3)
+    index = 0
+    for img in urls.text.splitlines():
+        if img.startswith("http") and index < 8:
+            cols[index % 3].image(img)
+            index += 1
 
 
 with st.sidebar:
